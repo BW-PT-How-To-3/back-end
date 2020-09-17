@@ -3,7 +3,7 @@ const Hacks = require("./hacks-model.js");
 const router = express.Router();
 
 //get router to findHacks from the hacks model and then display life hacks . catch error and display error: 500
-router.get("/", (req, res) => {
+router.get("/hacks", (req, res) => {
   Hacks.findHacks()
     .then((hacks) => {
       res.json(hacks);
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 //post router to addHCK to db scheme req body of hack to post. then display life hack if not catch and display error: 500
-router.post("/", (req, res) => {
+router.post("/hacks", (req, res) => {
   Hacks.addHack(req.body)
     .then((hacks) => {
       res.status(200).json({ hacks });

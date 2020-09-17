@@ -2,6 +2,8 @@ const db = require("../data/dbConfig");
 module.exports = {
   findHacks,
   addHacks,
+  findById,
+  findBy
 };
 
 function findHacks() {
@@ -15,4 +17,8 @@ function addHacks(hacks) {
 
 function findById(id) {
   return db("hacks").select("id", "user_id").where({ id }).first();
+}
+
+function findBy(filter) {
+  return db("hacks").select("id", "username", "password").where(filter);
 }
