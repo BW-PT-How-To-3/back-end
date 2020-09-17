@@ -5,9 +5,14 @@ module.exports = {
 };
 
 function findHacks() {
-  return db("hacks");
+  return db("hacks").select("id", "user_id");
 }
 
 function addHacks(hacks) {
-  return db("project").insert(hacks);
+  const [id] = await db("hacks").insert(hack);
+  return findById(id);
+}
+
+function findById(id) {
+  return db("hacks").select("id", "user_id").where({ id }).first();
 }
