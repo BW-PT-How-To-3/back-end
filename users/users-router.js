@@ -43,47 +43,7 @@ router.post("/users", async (req, res, next) => {
 });
 
 //post login req body for username and password, and find users from users model the set conditions
-// router.post('/login', (req, res) => {
-//   const { username, password } = req.body;
-//   const 
-
-//   Users.findBy({ username })
-//     .first()
-//     .then(user => {
-//       if (user && bcrypt.compareSync(password, user.password)) {
-//         const token = generateToken(user); // new line
  
-//         // the server needs to return the token to the client
-//         // this doesn't happen automatically like it happens with cookies
-//         res.status(200).json({
-//           message: `Welcome ${user.username}!, have a token...`,
-//           token, // attach the token as part of the response
-//         });
-//       } else {
-//         res.status(401).json({ message: 'Invalid Credentials' });
-//       }
-//     })
-//     .catch(error => {
-//       res.status(500).json({ Error: "Something is wrong"});
-//     });
-// });
-
-// function generateToken(user) {
-//   const payload = {
-//     userID: user.id, // sub in payload is what the token is about
-//     username: user.username,
-//     // ...otherData
-//   };
-
-//   const options = {
-//     expiresIn: '1d', // show other available options in the library's documentation
-//   };
-
-//   // extract the secret away so it can be required and used where needed
-//   return jwt.sign(payload, secrets.jwtSecret, options); // this method is synchronous
-// }
-
-//-----------------------------------------------------------------------------
 router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
