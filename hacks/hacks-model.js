@@ -11,7 +11,7 @@ function findHacks() {
 }
 
 async function addHacks(hacks) {
-  const [id] = await db("hacks").insert(hack);
+  const [id] = await db("hacks").insert(hacks);
   return findById(id);
 }
 
