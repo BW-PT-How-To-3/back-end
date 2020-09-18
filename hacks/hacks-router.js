@@ -14,10 +14,10 @@ router.get("/", (req, res) => {
 });
 
 //post router to addHCK to db scheme req body of hack to post. then display life hack if not catch and display error: 500
-router.post("/", (req, res) => {
-  Hacks.addHack(req.body)
+router.post("/hacks", (req, res) => {
+  Hacks.addHacks(req.body)
     .then((hacks) => {
-      res.status(200).json({ hacks });
+      res.status(200).json(hacks);
     })
     .catch((error) => {
       res.status(500).json({ error: "Could not add new life hack" });
