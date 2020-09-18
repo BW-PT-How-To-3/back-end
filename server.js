@@ -1,23 +1,20 @@
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const apiRouter = require('./api-router.js');
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const apiRouter = require("./api/api-router.js");
 
 const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-server.use('/api', apiRouter);
+server.use("/api", apiRouter);
 
-server.get('/', (req, res) => {
+server.get("/", (req, res) => {
   res.json({ message: "Backend here." });
 });
 
 module.exports = server;
-
-
-
 
 // const express = require('express');
 // const helmet = require('helmet')
@@ -33,7 +30,7 @@ module.exports = server;
 // server.use(logger('dev'));
 // server.use(cors());
 // server.use(express.json());
- 
+
 // // server.use(session({
 // //     resave: false,
 // //     saveUninitialized: false,
@@ -43,12 +40,12 @@ module.exports = server;
 // //         createtable: true
 // //     })
 // // }))
- 
+
 // server.use(usersRouter)
 
 // server.use((err, req, res, next) => {
 // 	console.log(err)
-	
+
 // 	res.status(500).json({
 // 		message: "Something went wrong",
 // 	})

@@ -1,14 +1,11 @@
 const db = require("../data/dbconfig");
 
-
 module.exports = {
   add,
   find,
   findBy,
   findById,
 };
-
-
 
 //async function to add user. set id to await users db and then insert new user by id. return it by using find id
 async function add(user) {
