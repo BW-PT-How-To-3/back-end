@@ -3,14 +3,14 @@ module.exports = {
   findHacks,
   addHacks,
   findById,
-  findBy
+  findBy,
 };
 
 function findHacks() {
   return db("hacks").select("id", "user_id");
 }
 
-function addHacks(hacks) {
+async function addHacks(hacks) {
   const [id] = await db("hacks").insert(hack);
   return findById(id);
 }
