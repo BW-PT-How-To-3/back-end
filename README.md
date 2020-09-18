@@ -11,3 +11,11 @@ POST /api/login
 GET /api/users
 
     If the user is logged in, respond with an array of all the users contained in the database. If the user is not logged in respond with the correct status code and the message: 'You shall not pass!'.
+
+GET /api/hacks
+
+    If user is logged in with restricted admin access, then find hacks from database.  If succesful send 200 message, if not send 500 failed message.
+
+POST /api/hacks
+
+    If user is logged in, then after requiring body input addHacks to user profile. If successful send 200 success message, if not send 500 message saying could not add hack.
