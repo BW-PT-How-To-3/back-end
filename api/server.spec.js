@@ -1,7 +1,7 @@
 const test = require("supertest");
 
 const server = require("./server.js");
-const db = require("../data/dbConfig.js");
+const db = require("../data/dbconfig.js");
 
 //test server for posting registration for success and fail
 describe("server", function () {
