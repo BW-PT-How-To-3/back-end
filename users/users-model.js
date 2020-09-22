@@ -1,29 +1,43 @@
 const db = require("../data/dbconfig");
+// const uuid = require("uuid");
 
-module.exports = {
-  add,
-  find,
-  findBy,
-  findById,
-};
-
-//async function to add user. set id to await users db and then insert new user by id. return it by using find id
-async function add(user) {
-  const [id] = await db("users").insert(user);
-  return findById(id);
-}
-
-//function to find users, return the users db and select it by the id and username
-function find() {
-  return db("users").select("id", "username");
-}
-
-//function findby to find user using filter and return the users db selecting by id, username, and password.
-function findBy(filter) {
-  return db("users").select("id", "username", "password").where(filter);
-}
-
-//function to findbyid to use id and then return users db selecting it by id and username.
 function findById(id) {
   return db("users").select("id", "username").where({ id }).first();
 }
+
+async function addUser(user, id) {
+  // const id = uuid.v4();
+   
+  await db("users").insert({ user, id });
+  return findById(id);
+}
+
+function allUsers() {
+  return db("users");
+}
+
+function findUser(filter) {
+  return db("users").select("id", "username", "password", "role").where(filter);
+}
+
+function updateUser(changes,  id) {
+  
+  return db("users").update(changes).where({ id });
+}
+
+
+function removeUser(id){
+  return db('users')
+  .where('id', id)
+  .del()
+  .then(response => (!response ? null : response))
+}
+
+module.exports = {
+  findById,
+  addUser,
+  allUsers,
+  findUser,
+  updateUser,
+  removeUser
+};

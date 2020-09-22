@@ -10,6 +10,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "build": "npm build",
+    "prestart": "knex migrate:latest",
     "heroku-postbuild": "npm run build"
   },
   "repository": {

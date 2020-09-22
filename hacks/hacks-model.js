@@ -8,7 +8,7 @@ module.exports = {
 
 //functtion to find hacks returning db of hacks finding with id and user_id
 function findHacks() {
-  return db("hacks").select("id", "user_id");
+  return db("hacks").select("*");
 }
 
 //async function to add hacks , set variable id to await hacks db info and then insert hacks, find by using id
