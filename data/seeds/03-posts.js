@@ -2,7 +2,7 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
 
   // Inserts seed entries
-  await knex("posts").insert([
+  await knex("howtos").insert([
     {
       author: "usertwo",
       id: 1,

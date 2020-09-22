@@ -1,28 +1,42 @@
+/*
+ * FileName: pm.js
+ * Title: Posts Model File
+ */
+//-----------------------------------------------------------------------------
+/*  dependencies  */
 const db = require("../data/dbconfig");
+//-----------------------------------------------------------------------------
+
+/*  Posts EndPoint Funchtions  */
+
+function addPost(post) {
+  return db("posts").insert(post);
+}
+
+function updatePost(changes, id) {
+  return db("posts").update(changes).where({ id });
+}
+
+function deletePost(id) {
+  return db("hacks")
+    .where("id", id)
+    .del()
+    .then((response) => (!response ? null : response));
+}
+
+function findAllPosts() {
+  return db("posts");
+}
+
+function findPostById(id) {
+  return db("posts").where("id ", id);
+}
+
 module.exports = {
-  findHacks,
-  addHacks,
-  findById,
-  findBy,
+  addPost,
+  updatePost,
+  deletePost,
+  findAllPosts,
+  findPostById,
 };
 
-//functtion to find hacks returning db of hacks finding with id and user_id
-function findHacks() {
-  return db("hacks").select("*");
-}
-
-//async function to add hacks , set variable id to await hacks db info and then insert hacks, find by using id
-async function addHacks(hacks) {
-  const [id] = await db("hacks").insert(hacks);
-  return findById(id);
-}
-
-//function to find by id, return hacks using id and user_id, located in variable id
-function findById(id) {
-  return db("hacks").select("id", "user_id").where({ id }).first();
-}
-
-//find by filter and return hacks db using is, usrname, password to be authenticated and filtered which hacks
-function findBy(filter) {
-  return db("hacks").select("id", "username", "password").where(filter);
-}

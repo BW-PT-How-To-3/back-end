@@ -12,7 +12,7 @@ exports.up = function (knex, Promise) {
       tbl.string("email", 256).notNullable();
       tbl.string("role").notNullable().references("name").inTable("roles");
     })
-    .createTable("posts", (tbl) => {
+    .createTable("howtos", (tbl) => {
       tbl.increments("id");
       tbl.string("title").notNullable();
       tbl.string("post").notNullable();

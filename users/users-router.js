@@ -28,7 +28,7 @@ ur.get('/getusers',  async (req, res, next) => {
 //-----------------------------------------------------------------------------
 ur.post('/register', async (req, res, next) => {
     try {
-        const { username, password, email, role } = req.body
+        const { username, password, email } = req.body
         const user = await db.findUser({ username }).first()
 
         if (user) {
