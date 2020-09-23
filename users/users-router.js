@@ -2,7 +2,7 @@ const express = require('express')
 const db = require('./users-model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-// const secrets = require('./config/secrets')
+const secrets = require('../config/secrets')
 const ec = require('../middleware/restrict')
 /*  USER ROUTER  */
 const ur = express.Router()
@@ -11,7 +11,7 @@ const ur = express.Router()
 //  GETs all user accounts. (You must be logged in with admin role)   
 // /api/users/getusers  
 //-----------------------------------------------------------------------------
-ur.get('/getusers',  ec('superadmin'), async (req, res, next) => {
+ur.get('/getusers', async (req, res, next) => {
    
   try {
        const users = await db.allUsers()
@@ -94,7 +94,7 @@ ur.post('/login', async (req, res, next) => {
 // /api/users/update/:id 
 //-----------------------------------------------------------------------------
 
-ur.put('/update/:id', ec('superuser'), (req, res) => {
+ur.put('/update/:id', ec('superadmin'), (req, res) => {
   const { id } = req.params;
   const changes = req.body
   

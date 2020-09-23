@@ -44,7 +44,6 @@ hr.post('/', restrict('basic'), (req, res ) => {
     .then(howto => {
         res.status(201).json({
             Success: "Your howto was added successfully",
-            howto
         })
     })
     .catch (err => {
