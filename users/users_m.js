@@ -1,7 +1,9 @@
 const db = require("../data/dbconfig");
 const uuid = require("uuid");
 
+//-----------------------------------------------------------------------------
 /*  Function finds users by their user id  */
+//-----------------------------------------------------------------------------
 function findById(id) {
   return db("users")
   .select("id", "username")
@@ -9,7 +11,9 @@ function findById(id) {
   .first();
 }
 
+//-----------------------------------------------------------------------------
 /*  Function inserts user into the database with a generated uuid  */
+//-----------------------------------------------------------------------------
 async function addUser(user) {
   const id = uuid.v4();
   await db("users")
@@ -17,26 +21,34 @@ async function addUser(user) {
   return findById(id);
 }
 
+//-----------------------------------------------------------------------------
 /*  Function pulls all user accounts from database  */
+//-----------------------------------------------------------------------------
 function allUsers() {
   return db("users");
 }
 
+//-----------------------------------------------------------------------------
 /*  Function finds users filtered by requested data  */
+//-----------------------------------------------------------------------------
 function findUser(filter) {
   return db("users")
   .select("id", "username", "password", "role")
   .where(filter);
 }
 
+//-----------------------------------------------------------------------------
 /*  Function updates the users account information  */
+//-----------------------------------------------------------------------------
 function updateUser(changes,  id) {
   return db("users")
   .update(changes)
   .where({ id });
 }
 
+//-----------------------------------------------------------------------------
 /*  Function removes user from database  */
+//-----------------------------------------------------------------------------
 function removeUser(id){
   return db('users')
   .where('id', id)
@@ -44,7 +56,9 @@ function removeUser(id){
   .then(response => (!response ? null : response))
 }
 
+//-----------------------------------------------------------------------------
 /*  Exporting all modules  */
+//-----------------------------------------------------------------------------
 module.exports = {
   findById,
   addUser,
