@@ -38,12 +38,13 @@ hr.get('/gethowto/:id', (req, res) => {
 });
 
 //-----------------------------------------------------------------------------
-hr.post('/new', restrict('basic'), (req, res ) => {
+hr.post('/', restrict('basic'), (req, res ) => {
     const howtoData = req.body
     db.addHowto(howtoData)
     .then(howto => {
         res.status(201).json({
-            Success: "Your howto was added successfully"
+            Success: "Your howto was added successfully",
+            howto
         })
     })
     .catch (err => {

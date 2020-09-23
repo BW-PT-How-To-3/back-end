@@ -1,5 +1,5 @@
 const db = require("../data/dbconfig");
-const uuid = require("uuid");
+// const uuid = require("uuid");
 
 function findById(id) {
   return db("users").select("id", "username").where({ id }).first();

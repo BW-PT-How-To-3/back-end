@@ -9,27 +9,27 @@ module.exports = {
 }
 
 function getAllHowtos() {
-    return db('Howtos')
+    return db('howtos')
 }
 
 function getHowtoById(id) {
-    return db('Howtos')
+    return db('howtos')
         .where('id', id)
     }
 
 function addHowto(howto) {
-    return db("Howtos")
+    return db("howtos")
         .insert(howto)
 }
 
 function updateHowto(changes, id) {
-    return db('Howtos')
+    return db('howtos')
         .update(changes)
         .where({ id })
 }
 
 function removeHowto(id){
-    return db('Howtos')
+    return db('howtos')
     .where('id', id)
     .del()
     .then(response => (!response ? null : response))
