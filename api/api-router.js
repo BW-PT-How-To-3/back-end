@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
-const hacksRouter = require("../hacks/hacks-router");
-const usersRouter = require("../users/users-router");
+const hr = require("../howtos/howto-router");
+const ur = require("../users/users-router");
 
-router.use("/hacks", hacksRouter);
-router.use("/users", usersRouter);
+router.use("/howto", hr);
+router.use("/users", ur);
 
 module.exports = router;

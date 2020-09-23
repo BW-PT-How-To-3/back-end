@@ -1,19 +1,16 @@
 const db = require("../data/dbconfig");
-// const uuid = require("uuid");
+const uuid = require("uuid");
 
 function findById(id) {
   return db("users").select("id", "username").where({ id }).first();
 }
 
-async function addUser(users, id) {
-  // const id = uuid.v4();
+async function addUser(user) {
+  const id = uuid.v4();
    
-  await db("users").insert(users, id);
+  await db("users").insert({ ...user, id });
   return findById(id);
 }
-
-
-
 
 function allUsers() {
   return db("users");
@@ -43,5 +40,4 @@ module.exports = {
   findUser,
   updateUser,
   removeUser
-}
-
+};
