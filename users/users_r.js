@@ -9,7 +9,7 @@ const ur = express.Router()
 
 //-----------------------------------------------------------------------------
 //  GETs all user accounts. (You must be logged in with admin role)   
-// /api/users/getusers  
+// /api/users/getusers
 //-----------------------------------------------------------------------------
 ur.get('/getusers', async (req, res, next) => {
   try {
