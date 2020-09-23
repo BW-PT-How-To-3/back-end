@@ -1,0 +1,16 @@
+body {
+   text-align: center;
+
+}
+
+table {
+    width: 80%;
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+}
+
+.tableHeader, td {
+    border: 1px solid black;
+    text-align: center;
+}

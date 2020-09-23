@@ -1,7 +1,10 @@
 const router = require("express").Router();
 
-const hr = require("../howtos/howto-router");
-const ur = require("../users/users-router");
+/*  Howto Router  */
+const hr = require("../howtos/howto_r");
+
+/*  Users Router  */
+const ur = require("../users/users_r");
 
 router.use("/howto", hr);
 router.use("/users", ur);
