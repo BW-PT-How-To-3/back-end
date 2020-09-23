@@ -5,12 +5,15 @@ function findById(id) {
   return db("users").select("id", "username").where({ id }).first();
 }
 
-async function addUser(user, id) {
+async function addUser(users, id) {
   // const id = uuid.v4();
    
-  await db("users").insert({ user, id });
+  await db("users").insert(users, id);
   return findById(id);
 }
+
+
+
 
 function allUsers() {
   return db("users");
@@ -40,4 +43,5 @@ module.exports = {
   findUser,
   updateUser,
   removeUser
-};
+}
+
