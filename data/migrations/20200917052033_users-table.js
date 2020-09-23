@@ -5,9 +5,8 @@ exports.up = function (knex, Promise) {
       tbl.string("name").unique().notNullable();
     })
     .createTable("users", (tbl) => {
-      tbl.increments('id').primary();
+      tbl.uuid('id').primary();
       tbl.string("username", 128).notNullable().unique();
- 
       tbl.string("password", 256).notNullable();
       tbl.string("email", 256).notNullable();
       tbl.string("role").notNullable().references("name").inTable("roles");

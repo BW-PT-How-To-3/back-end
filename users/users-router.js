@@ -43,7 +43,8 @@ ur.post('/register', async (req, res, next) => {
           role
       })
       return res.status(201).json({
-          Message:" User was created successfully!"
+          Message:" User was created successfully!",
+          newUser
       })
   } catch (err) {
       next(err)
