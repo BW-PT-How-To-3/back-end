@@ -7,6 +7,7 @@ const restrict = require('../middleware/restrict')
 /*  USER ROUTER  */
 const ur = express.Router()
 
+
 //-----------------------------------------------------------------------------
 //  GETs all user accounts. (You must be logged in with admin role)   
 // /api/users/getusers

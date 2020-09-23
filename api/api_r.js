@@ -8,8 +8,6 @@ const ur = require("../users/users_r");
 
 router.use("/howto", hr);
 router.use("/users", ur);
-router.get("/", (req, res) => {
-    res.json({ Message: "Welcome to the HowTo API!"})
-})
+
 
 module.exports = router;
