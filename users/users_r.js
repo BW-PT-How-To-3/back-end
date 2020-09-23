@@ -88,8 +88,7 @@ ur.post('/login', async (req, res, next) => {
 })
 
 //-----------------------------------------------------------------------------
-// PUT updates user      
-// /api/users/update/:id 
+// PUT updates user   /api/users/update/:id 
 //-----------------------------------------------------------------------------
 ur.put('/update/:id', restrict('superadmin'), (req, res) => {
   const { id } = req.params;
@@ -117,8 +116,7 @@ ur.put('/update/:id', restrict('superadmin'), (req, res) => {
 });
 
 //-----------------------------------------------------------------------------
-// DELETE   user     
-// /api/users/delete/:id  
+// DELETE   user   /api/users/delete/:id  
 //-----------------------------------------------------------------------------
 ur.delete('/delete/:id', restrict('superadmin'), (req, res) => {
   const { id } = req.params;
