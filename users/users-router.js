@@ -3,7 +3,7 @@ const db = require('./users-model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 // const secrets = require('./config/secrets')
-const restrict = require('../middleware/restrict')
+const ec = require('../middleware/restrict')
 /*  USER ROUTER  */
 const ur = express.Router()
 
@@ -28,7 +28,7 @@ ur.get('/getusers',  async (req, res, next) => {
 //-----------------------------------------------------------------------------
 ur.post('/register', async (req, res, next) => {
     try {
-        const { username, password, email } = req.body
+        const { username, password, email, role } = req.body
         const user = await db.findUser({ username }).first()
 
         if (user) {
@@ -40,7 +40,7 @@ ur.post('/register', async (req, res, next) => {
             username,
             password: await bcrypt.hash(password, 12),
             email,
-            role: 1
+            role
         })
         return res.status(201).json({
             Message:" User was created successfully!",
@@ -92,7 +92,7 @@ ur.post('/login', async (req, res, next) => {
 // /api/users/update/:id 
 //-----------------------------------------------------------------------------
 
-ur.put('/update/:id', restrict('admin'), (req, res) => {
+ur.put('/update/:id', ec('admin'), (req, res) => {
     const { id } = req.params;
     const changes = req.body
 
