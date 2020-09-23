@@ -21,19 +21,17 @@ module.exports = {
   },
   //add a production
   production: {
-    client: "sqlite3",
-    connection: {
-      database: "my_db", //name heroku guives in production, can name whatever you like
-      user: "username",
-      password: "password",
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: './data/seeds'
     },
     pool: {
       min: 2,
-      max: 10,
+      max: 10
     },
-    useNullAsDefault: true,
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
+  }
 };
