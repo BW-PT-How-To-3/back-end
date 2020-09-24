@@ -1,25 +1,24 @@
 const express = require('express')
-const db = require('./users-model')
+const db = require('./users_m')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secrets = require('../config/secrets')
-const ec = require('../middleware/restrict')
+const restrict = require('../middleware/restrict')
 /*  USER ROUTER  */
 const ur = express.Router()
 
+
 //-----------------------------------------------------------------------------
 //  GETs all user accounts. (You must be logged in with admin role)   
-// /api/users/getusers  
+// /api/users/getusers
 //-----------------------------------------------------------------------------
 ur.get('/getusers', async (req, res, next) => {
-   
   try {
        const users = await db.allUsers()
         res.status(200).json(users)
   }catch (err){
       next(err)
   }
-
 })
 
 //-----------------------------------------------------------------------------
@@ -71,13 +70,14 @@ ur.post('/login', async (req, res, next) => {
           Error: 'You have entered an incorrect password'
       })
   }
+
   /*  generate token  */
   const token =  jwt.sign({
       userID: user.id,
       username: user.usernme,
       userRole: user.role,
-      }, process.env.JWT_SECRET)   
-    
+      }, process.env.JWT_SECRET)
+
   res.cookie("token", token)
   res.status(200).json({ 
       Message: `Welcome ${user.username}!`,
@@ -88,22 +88,16 @@ ur.post('/login', async (req, res, next) => {
   }
 })
 
-
 //-----------------------------------------------------------------------------
-// PUT updates user      
-// /api/users/update/:id 
+// PUT updates user   /api/users/update/:id 
 //-----------------------------------------------------------------------------
-
-ur.put('/update/:id', ec('superadmin'), (req, res) => {
+ur.put('/update/:id', restrict('superadmin'), (req, res) => {
   const { id } = req.params;
   const changes = req.body
-  
-
   db.findById(id) 
   .then(user => {
     if (user) {
       db.updateUser(changes, id)
-     
       .then(updatedUser => {
         res.json({ 
           Success: updatedUser+ " User has been updated successfully." 
@@ -122,19 +116,16 @@ ur.put('/update/:id', ec('superadmin'), (req, res) => {
   });
 });
 
-  
 //-----------------------------------------------------------------------------
-// DELETE   user     
-// /api/users/delete/:id  
+// DELETE   user   /api/users/delete/:id  
 //-----------------------------------------------------------------------------
-ur.delete('/delete/:id', ec('superadmin'), (req, res) => {
+ur.delete('/delete/:id', restrict('superadmin'), (req, res) => {
   const { id } = req.params;
-
   db.removeUser(id)
   .then(deleted => {
     if (deleted) {
       res.json({ 
-        Deleted: deleted + " User has been successfully deleted." 
+        Deleted: " User has been successfully deleted." 
     });
     } else {
       res.status(404).json({ 
@@ -143,8 +134,11 @@ ur.delete('/delete/:id', ec('superadmin'), (req, res) => {
     }
   })
   .catch(err => {
-    res.status(500).json({ Error: 'Failed to delete User. Please check your code' });
+    res.status(500).json({ 
+      Error: 'Failed to delete User. Please check your code' 
+    });
   });
 });
 
+//-----------------------------------------------------------------------------
 module.exports = ur
