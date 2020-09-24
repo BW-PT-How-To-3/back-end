@@ -1,5 +1,5 @@
 // it's recommended to load configuration for .env as early as possible
-// require(" dotenv").config(); // add this line as the first thing to run1
+// require("dotenv").config(); // add this line as the first thing to run1
 
 const server = require("./server");
 

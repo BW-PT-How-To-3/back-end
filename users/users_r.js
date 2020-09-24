@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secrets = require('../config/secrets')
 const restrict = require('../middleware/restrict')
+const { response } = require('../server')
 /*  USER ROUTER  */
 const ur = express.Router()
 
@@ -44,7 +45,7 @@ ur.post('/register', async (req, res, next) => {
       })
       return res.status(201).json({
           Message:" User was created successfully!",
-          newUser,
+          newUser
          // access_token: token
       })
   } catch (err) {
@@ -79,12 +80,14 @@ ur.post('/login', async (req, res, next) => {
       userID: user.id,
       username: user.usernme,
       userRole: user.role,
-      },"this is our secret", process.env.JWT_SECRET, 
+      }, process.env.JWT_SECRET, 
      )
 
-  
+  res.cookie("token",token)
   res.status(200).json({ 
-     access_token: token
+    Message: `Welcome ${user.username}!`,
+    token
+  
       });
   } catch (err){
       next(err)

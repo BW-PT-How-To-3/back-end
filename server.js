@@ -12,9 +12,9 @@ server.use(cp());
 
 server.use("/api", apiRouter);
 
-/*server.use("/", (req, res) => {
+server.get("/", (req, res) => {
   res.json({ Message: "Welcome to the HowTo API!"})
-})*/
+})
 
  
 
