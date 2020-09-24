@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "prestart": "knex migrate:latest"
-  
+    "prestart": "knex migrate:latest",
+    "test": "jest --watch --verbose"
   },
   "repository": {
     "type": "git",
@@ -34,10 +34,16 @@
     "knex-cleaner": "^1.3.1",
     "morgan": "^1.10.0",
     "pg": "^8.3.3",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
-  }
+  },
+"jest": {
+  "testEnvironment":"node"
+  
+}
 }
