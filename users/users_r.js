@@ -21,6 +21,7 @@ ur.get('/getusers', async (req, res, next) => {
   }
 })
 
+
 //-----------------------------------------------------------------------------
 // POST registers new user and return users info    
 // /api/users/register  
@@ -43,7 +44,8 @@ ur.post('/register', async (req, res, next) => {
       })
       return res.status(201).json({
           Message:" User was created successfully!",
-          newUser
+          newUser,
+         // access_token: token
       })
   } catch (err) {
       next(err)
@@ -55,6 +57,7 @@ ur.post('/register', async (req, res, next) => {
 // /api/users/login 
 //-----------------------------------------------------------------------------
 ur.post('/login', async (req, res, next) => {
+ 
   try {
       const { username, password } = req.body
       const user = await db.findUser({ username }).first()
@@ -76,16 +79,17 @@ ur.post('/login', async (req, res, next) => {
       userID: user.id,
       username: user.usernme,
       userRole: user.role,
-      }, process.env.JWT_SECRET)
+      },"this is our secret", process.env.JWT_SECRET, 
+     )
 
-  res.cookie("token", token)
+  
   res.status(200).json({ 
-      Message: `Welcome ${user.username}!`,
-      token
+     access_token: token
       });
   } catch (err){
       next(err)
   }
+  
 })
 
 //-----------------------------------------------------------------------------
