@@ -10,12 +10,13 @@ server.use(express.json());
 server.use(cors());
 server.use(cp());
 
+server.use("/api", apiRouter);
 
 server.use("/", (req, res) => {
   res.json({ Message: "Welcome to the HowTo API!"})
 })
 
-server.use("/api", apiRouter);
+ 
 
 
 module.exports = server;
