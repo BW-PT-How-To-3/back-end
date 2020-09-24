@@ -10,7 +10,8 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "prestart": "knex migrate:latest",
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose",
+    "test": "NODE_ENV=test mocha - timeout 10000"
   },
   "repository": {
     "type": "git",
