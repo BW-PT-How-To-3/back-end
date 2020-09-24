@@ -3,6 +3,10 @@ const test = require("supertest");
 const server = require("../server.js");
 const db = require("../data/dbconfig.js");
 
+//testing if jest works
+it('Testing to see if Jest works', () => {
+  expect(1).toBe(1)
+})
 //test server for posting registration for success and fail
 describe("GET /", function () {
   beforeEach(async () => {
