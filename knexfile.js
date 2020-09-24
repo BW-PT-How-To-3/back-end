@@ -19,6 +19,22 @@ module.exports = {
       },
     },
   },
+  //add testing
+  testing: {
+    client: "sqlite3",
+    connection: {
+      filename: "./data/lifehacks.db3",
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./data/migrations",
+
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
+
+  },
   //add a production
   production: {
     client: "pg",

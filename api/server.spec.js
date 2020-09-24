@@ -1,20 +1,22 @@
 const test = require("supertest");
 
-const server = require("./server.js");
+const server = require("../server.js");
 const db = require("../data/dbconfig.js");
 
 //test server for posting registration for success and fail
-describe("server", function () {
+describe("GET /", function () {
   beforeEach(async () => {
-    await db("users").truncate();
+    await db(server).truncate();
   });
-  describe("post /register", function () {
+  describe("POST /register", function () {
     it("should return status 201", function () {
       return test(server)
-        .post("/api/auth/register")
+        .post("/register")
         .send({
           username: "sam",
           password: "apples",
+          email: "email@email.com",
+          role: "admin"
         })
         .then((res) => {
           expect(res.status).toBe(201);
@@ -22,7 +24,7 @@ describe("server", function () {
     });
     it("should return a success message", function () {
       return test(server)
-        .post("/api/users/register")
+        .post("/register")
         .send({
           username: "jondoe",
         })
@@ -33,10 +35,10 @@ describe("server", function () {
   });
 
   //test for post login in request  for success or failure
-  describe("post /login", function () {
+  describe("POST /login", function () {
     it("should return a fail message", function () {
       return test(server)
-        .post("/api/users/login")
+        .post("/login")
         .send({
           username: "jondoe",
           password: "winemaker",
@@ -47,7 +49,7 @@ describe("server", function () {
     });
     it("should return authentication error", function () {
       return test(server)
-        .post("/api/auth/login")
+        .post("/login")
         .send({
           username: "jondoe",
           password: "winemaker",
@@ -61,17 +63,17 @@ describe("server", function () {
   });
 
   //test for get request to pull life hacks
-  describe("get hacks", function () {
+  describe("GET /getall", function () {
     describe("should return invalid credentials message", function () {
       return test(server)
-        .get("/api/hacks")
+        .get("/getall")
         .then((res) => {
           expect(res.body.message).toBe("invalid credentials");
         });
     });
     describe("should return status 400", function () {
       return test(server)
-        .get("/api/hacks")
+        .get("/getall")
         .then((res) => {
           expect(res.status).toBe(400);
         });
