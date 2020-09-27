@@ -124,26 +124,26 @@ ur.put('/update/:id', restrict('superadmin'), async (req, res, next) => {
 //-----------------------------------------------------------------------------
 // DELETE   user   /api/users/delete/:id  
 //-----------------------------------------------------------------------------
-ur.delete('/delete/:id', restrict('superadmin'), (req, res) => {
+ur.delete('/delete/:id', restrict('superadmin'), async (req, res, next) => {
+  try {
   const { id } = req.params;
-  db.removeUser(id)
-  .then(deleted => {
-    if (deleted) {
+  const deleteduser = db.removeUser(id)
+   
+    if (deleteduser) {
       res.json({ 
         Deleted: " User has been successfully deleted." 
-    });
+    })
     } else {
       res.status(404).json({ 
         Error: 'Could not find User with given id. Please try another User id.' 
       });
     }
-  })
-  .catch(err => {
-    res.status(500).json({ 
-      Error: 'Failed to delete User. Please check your code' 
-    });
-  });
-});
+  
+  } catch(err)  {
+    next(err)
+  };
+})
+ 
 
 //-----------------------------------------------------------------------------
 module.exports = ur
