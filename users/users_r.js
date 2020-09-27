@@ -13,7 +13,7 @@ const ur = express.Router()
 //  GETs all user accounts. (You must be logged in with admin role)   
 // /api/users/getusers
 //-----------------------------------------------------------------------------
-ur.get('/getusers', async (req, res, next) => {
+ur.get('/getusers', restrict('admin'), async (req, res, next) => {
   try {
        const users = await db.allUsers()
         res.status(200).json(users)
