@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secrets = require('../config/secrets')
 const restrict = require('../middleware/restrict')
-const { response } = require('../server')
 /*  USER ROUTER  */
 const ur = express.Router()
 
@@ -98,11 +97,12 @@ ur.post('/login', async (req, res, next) => {
 //-----------------------------------------------------------------------------
 // PUT updates user   /api/users/update/:id 
 //-----------------------------------------------------------------------------
-ur.put('/update/:id', restrict('superadmin'), (req, res) => {
+ur.put('/update/:id', restrict('superadmin'), async (req, res, next) => {
+  try {
   const { id } = req.params;
   const changes = req.body
-  db.findById(id) 
-  .then(user => {
+  const user = db.findById(id) 
+ 
     if (user) {
       db.updateUser(changes, id)
       .then(updatedUser => {
@@ -115,13 +115,11 @@ ur.put('/update/:id', restrict('superadmin'), (req, res) => {
         Error: "Could not find User with given id. please try another user id" 
       });
     }
-  })
-  .catch (err => {
-    res.status(500).json({ 
-      Error: "Failed to update User. please check your code" 
+  } catch (err) {
+    next (err)
+  } 
     });
-  });
-});
+
 
 //-----------------------------------------------------------------------------
 // DELETE   user   /api/users/delete/:id  
