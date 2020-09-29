@@ -11,7 +11,7 @@ function restrict(role) {
         try {
             const token = req.headers.authorization
             if (!token) {
-                return res.status(401).json({ Error: "You are missing a token"})
+                return res.status(401).json(authError)
             }
 
             /*  decode the token, resign the payload, check if signature is valid  */
@@ -26,8 +26,6 @@ function restrict(role) {
                         Forbidden: 'You are not allowed here'
                     })
                 } 
-
-
 
             /*   we know the user is authorized at this point  */
             /*  make the tokens payload avail to other middleware functions  */

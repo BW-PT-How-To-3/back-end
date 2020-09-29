@@ -46,6 +46,7 @@ hr.get('/gethowto/:id', (req, res) => {
 //-----------------------------------------------------------------------------
 hr.post('/new', restrict('basic'), (req, res ) => {
     const howtoData = req.body
+    const author = req.token.username
     db.addHowto(howtoData)
     .then(howto => {
         res.status(201).json({
@@ -65,6 +66,7 @@ hr.post('/new', restrict('basic'), (req, res ) => {
 hr.put('/update/:id', restrict('basic'), (req, res) => {
   const { id } = req.params;
   const changes = req.body;
+  const author = req.token.username
 
   db.getHowtoById(id)
   .then(howto => {

@@ -77,8 +77,9 @@ ur.post('/login', async (req, res, next) => {
   /*  generate token  */
   const token =  jwt.sign({
       userID: user.id,
-      username: user.usernme,
+      username: user.username,
       userRole: user.role,
+      author: user.username
       }, process.env.JWT_SECRET, 
      )
 
